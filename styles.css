@@ -1,0 +1,292 @@
+:root {
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --glass: rgba(255, 255, 255, 0.1);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #ffffff 0%, #abbdcf 100%);
+    color: #1e293b;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 100px 20px 120px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shine 4s infinite;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.description {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    font-size: 1.2rem;
+    opacity: 0.95;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+}
+
+.video-section {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.video-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.badge {
+    background: var(--glass);
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgb(201, 23, 82);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.badge:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: #fff;
+    border: 2px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    margin: 0 auto;
+}
+
+/* Versión Escritorio */
+.video-section:not(.mobile-video-section) .video-container {
+    padding-top: 56.25%; /* 16:9 */
+    height: 0;
+}
+
+/* Versión Móvil */
+.mobile-video-section .video-container {
+    width: 300px;
+    height: 533px; /* para 9:16 */
+    max-width: 90%;
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 18px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+}
+
+.feature-card {
+    background: var(--glass);
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--primary);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(99,102,241,0.3);
+}
+
+.floating-button.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes shine {
+    0% { transform: translateX(-50%) skew(-15deg); }
+    100% { transform: translateX(150%) skew(-15deg); }
+}
+
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .video-container {
+        border-radius: 15px;
+    }
+
+    .mobile-video-section .video-container {
+        width: 250px;
+        height: 444px; /* para mantener 9:16 */
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 80px 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .badge {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+    }
+
+    .mobile-video-section .video-container {
+        width: 90%;
+        height: auto;
+        aspect-ratio: 9/16;
+        border-radius: 12px;
+    }
+
+    .video-container video {
+        border-radius: 10px;
+    }
+}
+
+/* Contenedor para centrar el botón */
+.btn-container {
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 2rem;
+}
+
+/* Botón estilo GitHub - From Uiverse.io by Creatlydev */
+.btn-github {
+cursor: pointer;
+display: flex;
+align-items: center;
+gap: 0.5rem;
+border: none;
+transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+border-radius: 100px;
+font-weight: 800;
+padding: 0.75rem 1rem;
+font-size: clamp(0.75rem, 2vw, 1rem); /* Responsive tamaño de fuente */
+line-height: 1rem;
+background-color: rgba(0, 0, 0, 0.4);
+box-shadow:
+inset 0 1px 0 0 rgba(255, 255, 255, 0.04),
+inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+color: #fff;
+}
+
+.btn-github:hover {
+box-shadow:
+inset 0 1px 0 0 rgba(255, 255, 255, 0.08),
+inset 0 0 0 1px rgba(252, 232, 3, 0.08);
+color: #fce803;
+transform: translate(0, -0.25rem);
+background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Responsividad adicional para el botón */
+@media (max-width: 480px) {
+.btn-github {
+padding: 0.5rem 0.75rem;
+font-size: 0.75rem;
+}
+}
